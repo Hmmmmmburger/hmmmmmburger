@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onshape Drawing Checklist</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="sidebar-container">
+        <div class="header">
+            <h1 class="header-title">2D check list</h1>
+            <button class="reset-btn" onclick="resetList()" title="重置所有勾選狀態">重置</button>
+        </div>
+
+        <div id="list-container" class="checklist-wrapper">
+            <label class="checklist-item">
+                <input type="checkbox" id="item1">
+                <div class="checkbox-box"></div>
+                <div class="item-content">
+                    <span class="item-title">Note</span>
+                    <p class="item-desc">材質、表處、工法、顏色</p>
+                </div>
+            </label>
+
+            <label class="checklist-item">
+                <input type="checkbox" id="item2">
+                <div class="checkbox-box"></div>
+                <div class="item-content">
+                    <span class="item-title">CTQ 關鍵尺寸</span>
+                    <p class="item-desc">關鍵尺寸已標註公差（GD&T）與備註。</p>
+                </div>
+            </label>
+
+            <label class="checklist-item">
+                <input type="checkbox" id="item3">
+                <div class="checkbox-box"></div>
+                <div class="item-content">
+                    <span class="item-title">BOM 核對</span>
+                    <p class="item-desc">零件序號、數量與組裝檔一致，材質正確。</p>
+                </div>
+            </label>
+
+            <label class="checklist-item">
+                <input type="checkbox" id="item4">
+                <div class="checkbox-box"></div>
+                <div class="item-content">
+                    <span class="item-title">標題欄 & 技術要求</span>
+                    <p class="item-desc">圖號、日期、版本、表面處理要求填寫。</p>
+                </div>
+            </label>
+
+            <label class="checklist-item">
+                <input type="checkbox" id="item5">
+                <div class="checkbox-box"></div>
+                <div class="item-content">
+                    <span class="item-title">線型與清潔</span>
+                    <p class="item-desc">移除多餘的輔助線，隱藏線顯示符合標準。</p>
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <script>
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+        // 載入儲存的狀態 (依 DocumentID 或 Document Properties 連動需進一步 API 開發，此為本地儲存版)
+        window.onload = () => {
+            checkboxes.forEach(box => {
+                const savedStatus = localStorage.getItem(box.id);
+                if (savedStatus === 'true') box.checked = true;
+            });
+        };
+
+        // 監聽勾選動作並儲存
+        checkboxes.forEach(box => {
+            box.addEventListener('change', () => {
+                localStorage.setItem(box.id, box.checked);
+            });
+        });
+
+        // 重置功能
+        function resetList() {
+            if(confirm('確定要清空所有勾選項目嗎？這將無法恢復。')) {
+                checkboxes.forEach(box => {
+                    box.checked = false;
+                    localStorage.removeItem(box.id);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
