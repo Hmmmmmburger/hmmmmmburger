@@ -112,15 +112,13 @@
         /* 新增：表格外部捲動容器 */
         .table-scroll {
             overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            /* 讓 iOS 裝置滑動更順暢 */
+            -webkit-overflow-scrolling: touch; /* 讓 iOS 裝置滑動更順暢 */
             width: 100%;
         }
 
         .iso-table {
             width: 100%;
-            min-width: 800px;
-            /* 新增：設定最小寬度，避免視窗過窄時文字擠壓，並觸發外層捲軸 */
+            min-width: 450px; /* 新增：設定最小寬度，避免視窗過窄時文字擠壓，並觸發外層捲軸 */
             border-collapse: collapse;
             font-size: 11px;
             table-layout: fixed;
