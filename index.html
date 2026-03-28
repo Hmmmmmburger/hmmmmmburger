@@ -83,12 +83,18 @@
             table-layout: fixed;
         }
         .iso-table th, .iso-table td {
-            border: 1px solid #ffffff;
+            border: 1px solid #e5e7eb;
             padding: 6px 2px;
             text-align: center;
         }
         .iso-table thead th { background: #d1d5db; color: #1f2937; }
-        .class-label { background: #ffffff; font-weight: 700; } /* 黃色側邊欄 */
+        
+        /* --- 關鍵修改：將黃色側邊欄調成白色 --- */
+        .class-label { 
+            background: #ffffff; /* 已修改為白色 */
+            font-weight: 700; 
+            color: #1f2937;
+        } 
     </style>
 </head>
 <body>
