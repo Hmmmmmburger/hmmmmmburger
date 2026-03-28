@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2D Assistant</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* --- Tab 基礎樣式 --- */
+        .tab-container {
+            display: flex;
+            background-color: #e5e7eb;
+            border-radius: 8px;
+            padding: 4px;
+            margin-bottom: 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .tab-button {
+            flex: 1;
+            background: none;
+            border: none;
+            padding: 8px 12px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #6b7280;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .tab-button.active {
+            background-color: #ffffff;
+            color: #2563eb;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- 內容顯示控制 --- */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* --- 原有 Checklist 樣式 --- */
+        .category-header {
+            background: #e5e7eb;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #374151;
+            margin: 10px 0 8px 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .category-header:hover {
+            background: #d1d5db;
+        }
+
+        .item-title {
+            font-size: 13.5px !important;
+        }
+
+        .item-desc {
+            font-size: 11px !important;
+            color: #9ca3af;
+        }
+
+        .checklist-item {
+            padding: 10px 14px !important;
+            margin-bottom: 6px;
+        }
+
+        /* --- ISO 規範大標題 --- */
+        .iso-section-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: #111827;
+            margin: 20px 0 12px 0;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #374151;
+            display: block;
+        }
+
+        /* --- 表格樣式優化 --- */
+        .iso-card {
+            background: #fff;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            margin-bottom: 15px;
+        }
+
+        .iso-title {
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #4b5563;
+            border-left: 4px solid #2563eb;
+            padding-left: 8px;
+        }
+
+        /* 新增：表格外部捲動容器 */
+        .table-scroll {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            /* 讓 iOS 裝置滑動更順暢 */
+            width: 100%;
+        }
+
+        .iso-table {
+            width: 100%;
+            min-width: 450px;
+            /* 新增：設定最小寬度，避免視窗過窄時文字擠壓，並觸發外層捲軸 */
+            border-collapse: collapse;
+            font-size: 11px;
+            table-layout: fixed;
+            background-color: #ffffff;
+        }
+
+        .iso-table th,
+        .iso-table td {
+            border: 1px solid #e5e7eb;
+            padding: 6px 2px;
+            text-align: center;
+            background-color: #ffffff;
+            /* 預設白色底 */
+        }
+
+        /* 第一列(標題列)樣式：灰色背景 + 粗體 */
+        .iso-table thead th {
+            background: #d1d5db;
+            color: #1f2937;
+            font-weight: 800;
+        }
+
+        /* 第一欄樣式：粗體 */
+        .iso-table tbody td:first-child {
+            font-weight: 800;
+            color: #1f2937;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="sidebar-container">
+        <div class="tab-container">
+            <button class="tab-button active" onclick="switchTab(event, 'checklist')">Checklist</button>
+            <button class="tab-button" onclick="switchTab(event, 'iso-standards')">ISO 標注規範</button>
+        </div>
+
+        <div id="checklist" class="tab-content active">
+            <div class="header">
+                <h1 class="header-title">2D check list</h1>
+                <button class="reset-btn" onclick="resetList()">重置</button>
+            </div>
+            <div class="category-header" onclick="toggleCat('cat1')">一、Note <span>▾</span></div>
+            <div id="cat1" class="category-content">
+                <label class="checklist-item"><input type="checkbox" id="v1">
+                    <div class="checkbox-box"></div>
+                    <div class="item-content"><span class="item-title">材質定義</span>
+                        <p class="item-desc">特殊料需明定牌號</p>
+                    </div>
+                </label>
+                <label class="checklist-item"><input type="checkbox" id="v2">
+                    <div class="checkbox-box"></div>
+                    <div class="item-content"><span class="item-title">表面處理工法&顏色</span>
+                        <p class="item-desc">依據功能定義膜厚</p>
+                    </div>
+                </label>
+                <label class="checklist-item"><input type="checkbox" id="v3a">
+                    <div class="checkbox-box"></div>
+                    <div class="item-content"><span class="item-title">製造工法</span>
+                        <p class="item-desc">可以打樣及量產兩方向定義</p>
+                    </div>
+                </label>
+                <label class="checklist-item"><input type="checkbox" id="v3b">
+                    <div class="checkbox-box"></div>
+                    <div class="item-content"><span class="item-title">公差依據</span>
+                        <p class="item-desc">建議依各ISO/JIS規範，若無則依圖框fine</p>
+                    </div>
+                </label>
+                <label class="checklist-item"><input type="checkbox" id="v4">
+                    <div class="checkbox-box"></div>
+                    <div class="item-content"><span class="item-title">特殊檢驗需求</span>
+                        <p class="item-desc">鹽霧、百格、氣密、阻抗、緊固件拉扭力等</p>
+                    </div>
+                </label>
+                <label class="checklist-item"><input type="checkbox" id="v5">
+                    <div class="checkbox-box"></div>
+                    <div class="item-content"><span class="item-title">帝王條款</span>
+                        <p class="item-desc">Dimension not shown must refer to 3D model</p>
+                    </div>
+                </label>
+            </div>
+
+            <div class="category-header" onclick="toggleCat('cat2')">二、圖框 <span>▾</span></div>
+            <div id="cat2" class="category-content">
+                <label class="checklist-item"><input type="checkbox" id="d11">
+                    <div class="checkbox-box"></div>
+                    <div class="item-content"><span class="item-title">品名＆料號</span>
+                        <p class="item-desc">確保每頁都的資訊相同</p>
+                    </div>
+                </label>
+                <label class="checklist-item"><input type="checkbox" id="d12">
+                    <div class="checkbox-box"></div>
+                    <div class="item-content"><span class="item-title">Check & Approve</span>
+                        <p class="item-desc">確認審核欄位</p>
+                    </div>
+                </label>
+                <label class="checklist-item"><input type="checkbox" id="d13">
+                    <div class="checkbox-box"></div>
+                    <div class="item-content"><span class="item-title">CC & SC</span>
+                        <p class="item-desc">關鍵(CC)影響安全法規；重要(SC)影響功能滿意度。</p>
+                    </div>
+                </label>
+                <label class="checklist-item"><input type="checkbox" id="d14">
+                    <div class="checkbox-box"></div>
+                    <div class="item-content"><span class="item-title">ECO NO.</span>
+                        <p class="item-desc">先至Odoo建立後貼上</p>
+                    </div>
+                </label>
+            </div>
+
+            <div class="category-header" onclick="toggleCat('cat3')">三、標註 <span>▾</span></div>
+            <div id="cat3" class="category-content">
+                <label class="checklist-item"><input type="checkbox" id="t21">
+                    <div class="checkbox-box"></div>
+                    <div class="item-content"><span class="item-title">關鍵尺寸</span>
+                        <p class="item-desc">組配尺寸大小及位置皆需定義</p>
+                    </div>
+                </label>
+                <label class="checklist-item"><input type="checkbox" id="t22">
+                    <div class="checkbox-box"></div>
+                    <div class="item-content"><span class="item-title">重複標註？</span>
+                        <p class="item-desc">是否有不同視圖對同尺寸重複標註</p>
+                    </div>
+                </label>
+                <label class="checklist-item"><input type="checkbox" id="t23">
+                    <div class="checkbox-box"></div>
+                    <div class="item-content"><span class="item-title">牙孔＆通孔定義</span>
+                        <p class="item-desc">下孔深、攻牙深、孔軸配合公差</p>
+                    </div>
+                </label>
+                <label class="checklist-item"><input type="checkbox" id="t24">
+                    <div class="checkbox-box"></div>
+                    <div class="item-content"><span class="item-title">GD&T幾何公差</span>
+                        <p class="item-desc">基準面定義，平面、平行、垂直度等</p>
+                    </div>
+                </label>
+                <label class="checklist-item"><input type="checkbox" id="t26">
+                    <div class="checkbox-box"></div>
+                    <div class="item-content"><span class="item-title">表面粗糙度</span>
+                        <p class="item-desc">所有密封面是否都有定義 Ra/Rz </p>
+                    </div>
+                </label>
+            </div>
+
+            <div class="category-header" onclick="toggleCat('cat4')">四、組合件 <span>▾</span></div>
+            <div id="cat4" class="category-content">
+                <label class="checklist-item"><input type="checkbox" id="b1">
+                    <div class="checkbox-box"></div>
+                    <div class="item-content"><span class="item-title">BOM</span>
+                        <p class="item-desc">零件編號、名稱、材質、數量</p>
+                    </div>
+                </label>
+                <label class="checklist-item"><input type="checkbox" id="b2">
+                    <div class="checkbox-box"></div>
+                    <div class="item-content"><span class="item-title">零件球標定義</span>
+                        <p class="item-desc">視圖中是否以球標標示清楚</p>
+                    </div>
+                </label>
+                <label class="checklist-item"><input type="checkbox" id="b3">
+                    <div class="checkbox-box"></div>
+                    <div class="item-content"><span class="item-title">零件規範</span>
+                        <p class="item-desc">公規牌號指定或客製尺寸規範</p>
+                    </div>
+                </label>
+            </div>
+        </div>
+
+        <div id="iso-standards" class="tab-content">
+
+            <div class="iso-section-title">ISO 2768 板金公差</div>
+
+            <div class="iso-card">
+                <div class="iso-title">線性尺寸公差</div>
+                <div class="table-scroll">
+                    <table class="iso-table">
+                        <thead>
+                            <tr>
+                                <th>等級</th>
+                                <th>0.5~3(mm)</th>
+                                <th>3~6(mm)</th>
+                                <th>6~30(mm)</th>
+                                <th>30~120(mm)</th>
+                                <th>120~400(mm)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>f (精)</td>
+                                <td>±0.05</td>
+                                <td>±0.05</td>
+                                <td>±0.1</td>
+                                <td>±0.15</td>
+                                <td>±0.2</td>
+                            </tr>
+                            <tr>
+                                <td>m (中)</td>
+                                <td>±0.1</td>
+                                <td>±0.1</td>
+                                <td>±0.2</td>
+                                <td>±0.3</td>
+                                <td>±0.5</td>
+                            </tr>
+                            <tr>
+                                <td>c (粗)</td>
+                                <td>±0.2</td>
+                                <td>±0.3</td>
+                                <td>±0.5</td>
+                                <td>±0.8</td>
+                                <td>±1.2</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="iso-card">
+                <div class="iso-title">角度尺寸公差</div>
+                <div class="table-scroll">
+                    <table class="iso-table">
+                        <thead>
+                            <tr>
+                                <th>等級</th>
+                                <th>≤10mm</th>
+                                <th>10~50(mm)</th>
+                                <th>50~120(mm)</th>
+                                <th>120~400(mm)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>f (精)</td>
+                                <td>±1°</td>
+                                <td>±0.5°</td>
+                                <td>±0.3°</td>
+                                <td>±0.2°</td>
+                            </tr>
+                            <tr>
+                                <td>m (中)</td>
+                                <td>±1°</td>
+                                <td>±1°</td>
+                                <td>±0.5°</td>
+                                <td>±0.3°</td>
+                            </tr>
+                            <tr>
+                                <td>c (粗)</td>
+                                <td>±1°</td>
+                                <td>±1.5°</td>
+                                <td>±1°</td>
+                                <td>±0.5°</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="iso-section-title">表面粗糙度規範</div>
+
+            <div class="iso-card">
+                <div class="iso-title">常見加工方式對照</div>
+                <div class="table-scroll">
+                    <table class="iso-table">
+                        <thead>
+                            <tr>
+                                <th>加工方式</th>
+                                <th>Ra (μm)</th>
+                                <th>說明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>超精密研磨 / 拋光 (Superfinishing)</td>
+                                <td>0.025~0.1</td>
+                                <td>用於光學、精密軸承、航空級零件</td>
+                            </tr>
+                            <tr>
+                                <td>精密研磨 (Precision Grinding)</td>
+                                <td>0.1~0.4</td>
+                                <td>高精度軸、配合孔</td>
+                            </tr>
+                            <tr>
+                                <td>精車 (Fine Turning)</td>
+                                <td>0.4~1.6</td>
+                                <td>精密滑動配合零件</td>
+                            </tr>
+                            <tr>
+                                <td>一般車削 / 銑削 (General Turning/Milling)</td>
+                                <td>1.6~3.2</td>
+                                <td>常見機械加工零件</td>
+                            </tr>
+                            <tr>
+                                <td>粗銑 / 粗車 (Rough Machining)</td>
+                                <td>3.2~12.5</td>
+                                <td>結構件或非精密區域</td>
+                            </tr>
+                            <tr>
+                                <td>鑄造 / 鍛造 (Casting/Forging)</td>
+                                <td>6.3~25</td>
+                                <td>毛坯或次加工表面</td>
+                            </tr>
+                            <tr>
+                                <td>焊接表面 (Weld Surface)</td>
+                                <td>12.5~50</td>
+                                <td>焊縫及未修磨表面</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="iso-card">
+                <div class="iso-title">依功能之選用建議</div>
+                <div class="table-scroll">
+                    <table class="iso-table">
+                        <thead>
+                            <tr>
+                                <th style="width:35%">功能需求</th>
+                                <th style="width:25%">Ra (μm)</th>
+                                <th>配合範例</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>高精度配合</td>
+                                <td>0.2 ~ 0.8</td>
+                                <td>H7/g6 軸孔、導柱</td>
+                            </tr>
+                            <tr>
+                                <td>密封面</td>
+                                <td>0.1 ~ 0.8</td>
+                                <td>O-ring 接觸、避洩漏</td>
+                            </tr>
+                            <tr>
+                                <td>裝飾件＆外觀面</td>
+                                <td>0.8 ~ 1.6</td>
+                                <td>一般裝飾處理件</td>
+                            </tr>
+                            <tr>
+                                <td>結構件＆非配合區</td>
+                                <td>3.2 ~ 12.5</td>
+                                <td>焊接、支撐結構件</td>
+                            </tr>
+                            <tr>
+                                <td>鑄件毛胚</td>
+                                <td>12.5 ~ 50</td>
+                                <td>鍛造、鑄造原始表面</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <p class="item-desc" style="text-align: center;">*參照 ISO 2768-1 & ISO 1302 規範</p>
+        </div>
+    </div>
+
+    <script>
+        // Tab 切換邏輯
+        function switchTab(evt, tabName) {
+            const contents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < contents.length; i++) {
+                contents[i].classList.remove("active");
+            }
+            const buttons = document.getElementsByClassName("tab-button");
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove("active");
+            }
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+
+        // 原有 Checklist 邏輯 (包含存檔功能)
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        window.onload = () => {
+            checkboxes.forEach(box => {
+                const savedStatus = localStorage.getItem(box.id);
+                if (savedStatus === 'true') box.checked = true;
+            });
+        };
+        checkboxes.forEach(box => {
+            box.addEventListener('change', () => {
+                localStorage.setItem(box.id, box.checked);
+            });
+        });
+
+        function resetList() {
+            if (confirm('清空所有勾選？')) {
+                checkboxes.forEach(box => {
+                    box.checked = false;
+                    localStorage.removeItem(box.id);
+                });
+            }
+        }
+
+        function toggleCat(id) {
+            const el = document.getElementById(id);
+            el.style.display = (el.style.display === 'none') ? 'block' : 'none';
+        }
+    </script>
+</body>
+
+</html>
