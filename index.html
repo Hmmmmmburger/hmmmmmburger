@@ -109,7 +109,7 @@
             padding-left: 8px;
         }
 
-        /* 新增：表格外部捲動容器 */
+        /* 表格外部捲動容器 */
         .table-scroll {
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
@@ -120,7 +120,6 @@
         .iso-table {
             width: 100%;
             min-width: 450px;
-            /* 新增：設定最小寬度，避免視窗過窄時文字擠壓，並觸發外層捲軸 */
             border-collapse: collapse;
             font-size: 11px;
             table-layout: fixed;
@@ -148,6 +147,21 @@
             font-weight: 800;
             color: #1f2937;
         }
+
+        /* --- 新增：PEM 專用表格樣式 (避免影響 ISO 表格) --- */
+        .pem-table {
+            width: 100%;
+            min-width: 800px;
+            border-collapse: collapse;
+            font-size: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+            font-family: -apple-system, sans-serif;
+        }
+
+        .pem-table th, .pem-table td {
+            border: 1px solid #ddd;
+        }
     </style>
 </head>
 
@@ -157,6 +171,7 @@
         <div class="tab-container">
             <button class="tab-button active" onclick="switchTab(event, 'checklist')">Checklist</button>
             <button class="tab-button" onclick="switchTab(event, 'iso-standards')">ISO 標注規範</button>
+            <button class="tab-button" onclick="switchTab(event, 'pem-standards')">PEM 規格表</button>
         </div>
 
         <div id="checklist" class="tab-content active">
@@ -290,9 +305,7 @@
         </div>
 
         <div id="iso-standards" class="tab-content">
-
             <div class="iso-section-title">ISO 2768 板金公差</div>
-
             <div class="iso-card">
                 <div class="iso-title">線性尺寸公差</div>
                 <div class="table-scroll">
@@ -378,7 +391,6 @@
             </div>
 
             <div class="iso-section-title">表面粗糙度規範</div>
-
             <div class="iso-card">
                 <div class="iso-title">常見加工方式對照</div>
                 <div class="table-scroll">
@@ -472,8 +484,220 @@
                     </table>
                 </div>
             </div>
-
             <p class="item-desc" style="text-align: center;">*參照 ISO 2768-1 & ISO 1302 規範</p>
+        </div>
+
+        <div id="pem-standards" class="tab-content">
+            <div class="iso-section-title">PEM 壓鉚螺母規格表</div>
+            <div class="iso-card">
+                <div class="iso-title">S™/SS™/CLS™/CLSS™/SP™ Nuts</div>
+                
+                <div class="table-scroll">
+                    <table class="pem-table">
+                        <thead style="background-color: #f2f2f2; color: #333; font-weight: bold;">
+                            <tr style="border-bottom: 2px solid #ccc;">
+                                <th rowspan="3" style="background-color: #fce99a; width: 30px; padding: 8px;">Metric</th>
+                                <th rowspan="2" style="padding: 6px;">Thread Size</th>
+                                <th colspan="3" style="padding: 6px;">Type Fastener Material</th>
+                                <th rowspan="2" style="padding: 6px;">Thread Code</th>
+                                <th rowspan="2" style="padding: 6px;">Shank Code</th>
+                                <th rowspan="2" style="padding: 6px;">A (Shank) Max.</th>
+                                <th rowspan="2" style="padding: 6px;">Rec. Min. Sheet Thickness (1)</th>
+                                <th rowspan="2" style="padding: 6px;">Hole Size In Sheet +0.08</th>
+                                <th rowspan="2" style="padding: 6px;">C Max.</th>
+                                <th rowspan="2" style="padding: 6px;">E ±0.25</th>
+                                <th rowspan="2" style="padding: 6px;">T ±0.25</th>
+                                <th rowspan="2" style="padding: 6px;">Min. Dist. Hole C/L To Edge (4)</th>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #ddd;">
+                                <th style="padding: 4px; font-weight: normal; font-size: 11px;">Carbon Steel</th>
+                                <th style="padding: 4px; font-weight: normal; font-size: 11px;">Stainless Steel</th>
+                                <th style="padding: 4px; font-weight: normal; font-size: 11px;">Hardened Stainless Steel</th>
+                            </tr>
+                        </thead>
+                        <tbody style="color: #444;">
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td rowspan="31" style="background-color: #fce99a; font-weight: bold;">Metric</td>
+                                <td rowspan="3" style="font-weight: bold; background-color: #fbfbfb;">M2 x 0.4</td>
+                                <td rowspan="3">S</td>
+                                <td rowspan="3">CLS</td>
+                                <td rowspan="3">SP</td>
+                                <td rowspan="3">M2</td>
+                                <td>0<sup>(2)</sup></td>
+                                <td>0.77</td>
+                                <td>0.8</td>
+                                <td rowspan="3">4.22</td>
+                                <td rowspan="3">4.2</td>
+                                <td rowspan="3">6.35</td>
+                                <td rowspan="3">1.5</td>
+                                <td rowspan="3">4.8</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #eee;"><td>1</td><td>0.97</td><td>1</td></tr>
+                            <tr style="border-bottom: 1px solid #ddd;"><td>2</td><td>1.38</td><td>1.4</td></tr>
+                
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td rowspan="3" style="font-weight: bold; background-color: #fbfbfb;">M2.5 x 0.45</td>
+                                <td rowspan="3">S</td>
+                                <td rowspan="3">CLS</td>
+                                <td rowspan="3">SP</td>
+                                <td rowspan="3">M2.5</td>
+                                <td>0</td>
+                                <td>0.77</td>
+                                <td>0.8</td>
+                                <td rowspan="3">4.22</td>
+                                <td rowspan="3">4.2</td>
+                                <td rowspan="3">6.35</td>
+                                <td rowspan="3">1.5</td>
+                                <td rowspan="3">4.8</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #eee;"><td>1</td><td>0.97</td><td>1</td></tr>
+                            <tr style="border-bottom: 1px solid #ddd;"><td>2</td><td>1.38</td><td>1.4</td></tr>
+                
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td rowspan="3" style="font-weight: bold; background-color: #fbfbfb;">M3 x 0.5</td>
+                                <td rowspan="3">S</td>
+                                <td rowspan="3">CLS</td>
+                                <td rowspan="3">SP</td>
+                                <td rowspan="3">M3</td>
+                                <td>0</td>
+                                <td>0.77</td>
+                                <td>0.8</td>
+                                <td rowspan="3">4.22</td>
+                                <td rowspan="3">4.2</td>
+                                <td rowspan="3">6.35</td>
+                                <td rowspan="3">1.5</td>
+                                <td rowspan="3">4.8</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #eee;"><td>1</td><td>0.97</td><td>1</td></tr>
+                            <tr style="border-bottom: 1px solid #ddd;"><td>2</td><td>1.38</td><td>1.4</td></tr>
+                
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td rowspan="3" style="font-weight: bold; background-color: #fbfbfb;">M3.5 x 0.6</td>
+                                <td rowspan="3">S</td>
+                                <td rowspan="3">CLS</td>
+                                <td rowspan="3">—</td>
+                                <td rowspan="3">M3.5</td>
+                                <td>0</td>
+                                <td>0.77</td>
+                                <td>0.8</td>
+                                <td rowspan="3">4.75</td>
+                                <td rowspan="3">4.73</td>
+                                <td rowspan="3">7.11</td>
+                                <td rowspan="3">1.5</td>
+                                <td rowspan="3">5.6</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #eee;"><td>1</td><td>0.97</td><td>1</td></tr>
+                            <tr style="border-bottom: 1px solid #ddd;"><td>2</td><td>1.38</td><td>1.4</td></tr>
+                
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td rowspan="3" style="font-weight: bold; background-color: #fbfbfb;">M4 x 0.7</td>
+                                <td rowspan="3">S</td>
+                                <td rowspan="3">CLS</td>
+                                <td rowspan="3">SP</td>
+                                <td rowspan="3">M4</td>
+                                <td>0</td>
+                                <td>0.77</td>
+                                <td>0.8</td>
+                                <td rowspan="3">5.41</td>
+                                <td rowspan="3">5.38</td>
+                                <td rowspan="3">7.87</td>
+                                <td rowspan="3">2</td>
+                                <td rowspan="3">6.9</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #eee;"><td>1</td><td>0.97</td><td>1</td></tr>
+                            <tr style="border-bottom: 1px solid #ddd;"><td>2</td><td>1.38</td><td>1.4</td></tr>
+                
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td rowspan="3" style="font-weight: bold; background-color: #fbfbfb;">M5 x 0.8</td>
+                                <td rowspan="3">SS</td>
+                                <td rowspan="3">CLSS</td>
+                                <td rowspan="3">SP</td>
+                                <td rowspan="3">M5</td>
+                                <td>0</td>
+                                <td>0.77</td>
+                                <td>0.8</td>
+                                <td rowspan="3">6.35</td>
+                                <td rowspan="3">6.33</td>
+                                <td rowspan="3">8.64</td>
+                                <td rowspan="3">2</td>
+                                <td rowspan="3">7.1</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #eee;"><td>1</td><td>0.97</td><td>1</td></tr>
+                            <tr style="border-bottom: 1px solid #ddd;"><td>2</td><td>1.38</td><td>1.4</td></tr>
+                
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td rowspan="4" style="font-weight: bold; background-color: #fbfbfb;">M6 x 1</td>
+                                <td rowspan="4">S<sup>(3)</sup></td>
+                                <td rowspan="4">CLS</td>
+                                <td rowspan="4">SP</td>
+                                <td rowspan="4">M6</td>
+                                <td>00<sup>(2)</sup></td>
+                                <td>0.89</td>
+                                <td>0.92</td>
+                                <td rowspan="4">8.75</td>
+                                <td rowspan="4">8.73</td>
+                                <td rowspan="4">11.18</td>
+                                <td rowspan="4">4.08</td>
+                                <td rowspan="4">8.6</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #eee;"><td>0<sup>(2)</sup></td><td>1.15</td><td>1.2</td></tr>
+                            <tr style="border-bottom: 1px solid #eee;"><td>1</td><td>1.38</td><td>1.4</td></tr>
+                            <tr style="border-bottom: 1px solid #ddd;"><td>2</td><td>2.21</td><td>2.29</td></tr>
+                
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td rowspan="2" style="font-weight: bold; background-color: #fbfbfb;">M8 x 1.25</td>
+                                <td rowspan="2">S<sup>(3)</sup></td>
+                                <td rowspan="2">CLS</td>
+                                <td rowspan="2">SP</td>
+                                <td rowspan="2">M8</td>
+                                <td>1</td>
+                                <td>1.38</td>
+                                <td>1.4</td>
+                                <td rowspan="2">10.5</td>
+                                <td rowspan="2">10.47</td>
+                                <td rowspan="2">12.7</td>
+                                <td rowspan="2">5.47</td>
+                                <td rowspan="2">9.7</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #ddd;"><td>2</td><td>2.21</td><td>2.29</td></tr>
+                
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td rowspan="2" style="font-weight: bold; background-color: #fbfbfb;">M10 x 1.5</td>
+                                <td rowspan="2">S</td>
+                                <td rowspan="2">CLS</td>
+                                <td rowspan="2">SP</td>
+                                <td rowspan="2">M10</td>
+                                <td>1</td>
+                                <td>2.21</td>
+                                <td>2.29</td>
+                                <td rowspan="2">14</td>
+                                <td rowspan="2">13.97</td>
+                                <td rowspan="2">17.35</td>
+                                <td rowspan="2">7.48</td>
+                                <td rowspan="2">13.5</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #ddd;"><td>2<sup>(2)</sup></td><td>3.05</td><td>3.18</td></tr>
+                
+                            <tr>
+                                <td style="font-weight: bold; background-color: #fbfbfb;">M12 x 1.75</td>
+                                <td>S</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td>M12</td>
+                                <td>1</td>
+                                <td>3.05</td>
+                                <td>3.18</td>
+                                <td>17</td>
+                                <td>16.95</td>
+                                <td>20.57</td>
+                                <td>8.5</td>
+                                <td>16</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <p class="item-desc" style="text-align: center;">*參照 PEM 規格手冊</p>
         </div>
     </div>
 
