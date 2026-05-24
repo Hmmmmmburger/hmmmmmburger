@@ -8,21 +8,25 @@
     <style>
         /* ===== Design Tokens ===== */
         :root {
-            --bg:           #f4f4f2;
-            --surface:      #ffffff;
-            --border:       #d0d0cc;
+            --bg: #f4f4f2;
+            --surface: #ffffff;
+            --border: #d0d0cc;
             --border-light: #e8e8e4;
-            --text:         #1c1c1a;
-            --muted:        #888880;
-            --label:        #555550;
-            --green-dark:   #1a6038;
-            --red-dark:     #981825;
-            --blue:         #1a3e78;
+            --text: #1c1c1a;
+            --muted: #888880;
+            --label: #555550;
+            --green-dark: #1a6038;
+            --red-dark: #981825;
+            --blue: #1a3e78;
             --sans: 'Calibri', 'Microsoft JhengHei', '微軟正黑體', sans-serif;
         }
 
         /* ===== 基礎設定 ===== */
-        *, *::before, *::after { box-sizing: border-box; }
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
 
         body {
             font-family: var(--sans);
@@ -75,7 +79,7 @@
         .tab-button.active {
             background-color: var(--surface);
             color: var(--text);
-            box-shadow: 0 2px 8px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.04);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .07), 0 1px 2px rgba(0, 0, 0, .04);
         }
 
         /* ===== 頁首 ===== */
@@ -156,7 +160,7 @@
             padding: 10px 12px;
             border-radius: 12px;
             border: 1px solid var(--border-light);
-            box-shadow: 0 2px 8px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.04);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .07), 0 1px 2px rgba(0, 0, 0, .04);
             display: flex;
             align-items: flex-start;
             gap: 12px;
@@ -191,7 +195,7 @@
             align-items: center;
         }
 
-        .checklist-item input:checked ~ .checkbox-box {
+        .checklist-item input:checked~.checkbox-box {
             background-color: var(--text);
             border-color: var(--text);
         }
@@ -207,7 +211,7 @@
             margin-bottom: 1px;
         }
 
-        .checklist-item input:checked ~ .checkbox-box::after {
+        .checklist-item input:checked~.checkbox-box::after {
             display: block;
         }
 
@@ -231,20 +235,25 @@
             line-height: 1.5;
         }
 
-        .checklist-item input:checked ~ .item-content .item-title {
+        .checklist-item input:checked~.item-content .item-title {
             color: var(--muted);
             text-decoration: line-through;
         }
 
-        .checklist-item input:checked ~ .item-content .item-desc {
+        .checklist-item input:checked~.item-content .item-desc {
             color: var(--border);
         }
 
         /* ===== 內容顯示控制 ===== */
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
+        .tab-content {
+            display: none;
+        }
 
-        /* ===== ISO / PEM 大標題 ===== */
+        .tab-content.active {
+            display: block;
+        }
+
+        /* ===== ISO 大標題 ===== */
         .iso-section-title {
             font-size: 13px;
             font-weight: 800;
@@ -261,7 +270,7 @@
             background: var(--surface);
             border-radius: 12px;
             border: 1px solid var(--border);
-            box-shadow: 0 2px 8px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.04);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .07), 0 1px 2px rgba(0, 0, 0, .04);
             padding: 12px;
             margin-bottom: 12px;
         }
@@ -284,7 +293,6 @@
         }
 
         /* ===== 統一表格樣式 ===== */
-        .pem-table,
         .iso-table {
             width: 100%;
             border-collapse: collapse;
@@ -294,8 +302,6 @@
             background-color: var(--surface) !important;
         }
 
-        .pem-table th,
-        .pem-table td,
         .iso-table th,
         .iso-table td {
             border: 1px solid var(--border-light);
@@ -304,7 +310,6 @@
             color: var(--text);
         }
 
-        .pem-table thead th,
         .iso-table thead th {
             background-color: var(--bg) !important;
             color: var(--label) !important;
@@ -313,50 +318,14 @@
             letter-spacing: .03em;
         }
 
-        .pem-table tbody td.gray-cell,
         .iso-table tbody td.gray-cell {
             background-color: var(--bg) !important;
             font-weight: 700 !important;
             color: var(--label) !important;
         }
 
-        /* ===== PEM 圖片說明區 ===== */
-        .pem-info-block {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-            align-items: center;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.04);
-            padding: 14px;
-            margin-bottom: 14px;
-        }
-
-        .pem-info-block img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 7px;
-        }
-
-        .pem-info-block h4 {
-            margin: 0 0 8px 0;
-            font-size: 13px;
-            color: var(--text);
-            font-weight: 700;
-        }
-
-        .pem-info-block ul {
-            margin: 0;
-            padding-left: 18px;
-            font-size: 11.5px;
-            color: var(--label);
-            line-height: 1.65;
-        }
-
-        .pem-info-block ul li {
-            margin-bottom: 6px;
+        .iso-table tbody tr.tg-highlight td {
+            background-color: #e4e4e0 !important;
         }
 
         /* ===== 頁腳備注 ===== */
@@ -375,7 +344,6 @@
         <div class="tab-container">
             <button class="tab-button active" onclick="switchTab(event, 'checklist')">Checklist</button>
             <button class="tab-button" onclick="switchTab(event, 'iso-standards')">ISO 標注規範</button>
-            <button class="tab-button" onclick="switchTab(event, 'pem-standards')">PEM 規格表</button>
         </div>
 
         <!-- ===== Tab 1: Checklist ===== -->
@@ -385,7 +353,7 @@
                 <button class="reset-btn" onclick="resetList()">重置</button>
             </div>
 
-            <div class="category-header" onclick="toggleCat('cat1')">一、Note <span class="arrow">▾</span></div>
+            <div class="category-header" onclick="toggleCat('cat1')">1. Note <span class="arrow">▾</span></div>
             <div id="cat1" class="category-content">
                 <div class="checklist-wrapper">
                     <label class="checklist-item"><input type="checkbox" id="v1">
@@ -427,7 +395,7 @@
                 </div>
             </div>
 
-            <div class="category-header" onclick="toggleCat('cat2')">二、圖框 <span class="arrow">▾</span></div>
+            <div class="category-header" onclick="toggleCat('cat2')">2.圖框 <span class="arrow">▾</span></div>
             <div id="cat2" class="category-content">
                 <div class="checklist-wrapper">
                     <label class="checklist-item"><input type="checkbox" id="d11">
@@ -457,7 +425,7 @@
                 </div>
             </div>
 
-            <div class="category-header" onclick="toggleCat('cat3')">三、標註 <span class="arrow">▾</span></div>
+            <div class="category-header" onclick="toggleCat('cat3')">3. 標註 <span class="arrow">▾</span></div>
             <div id="cat3" class="category-content">
                 <div class="checklist-wrapper">
                     <label class="checklist-item"><input type="checkbox" id="t21">
@@ -493,7 +461,7 @@
                 </div>
             </div>
 
-            <div class="category-header" onclick="toggleCat('cat4')">四、組合件 <span class="arrow">▾</span></div>
+            <div class="category-header" onclick="toggleCat('cat4')">4. 組合件 <span class="arrow">▾</span></div>
             <div id="cat4" class="category-content">
                 <div class="checklist-wrapper">
                     <label class="checklist-item"><input type="checkbox" id="b1">
@@ -538,15 +506,27 @@
                         <tbody>
                             <tr>
                                 <td class="gray-cell">f (精)</td>
-                                <td>±0.05</td><td>±0.05</td><td>±0.1</td><td>±0.15</td><td>±0.2</td>
+                                <td>±0.05</td>
+                                <td>±0.05</td>
+                                <td>±0.1</td>
+                                <td>±0.15</td>
+                                <td>±0.2</td>
                             </tr>
                             <tr>
                                 <td class="gray-cell">m (中)</td>
-                                <td>±0.1</td><td>±0.1</td><td>±0.2</td><td>±0.3</td><td>±0.5</td>
+                                <td>±0.1</td>
+                                <td>±0.1</td>
+                                <td>±0.2</td>
+                                <td>±0.3</td>
+                                <td>±0.5</td>
                             </tr>
                             <tr>
                                 <td class="gray-cell">c (粗)</td>
-                                <td>±0.2</td><td>±0.3</td><td>±0.5</td><td>±0.8</td><td>±1.2</td>
+                                <td>±0.2</td>
+                                <td>±0.3</td>
+                                <td>±0.5</td>
+                                <td>±0.8</td>
+                                <td>±1.2</td>
                             </tr>
                         </tbody>
                     </table>
@@ -569,20 +549,631 @@
                         <tbody>
                             <tr>
                                 <td class="gray-cell">f (精)</td>
-                                <td>±1°</td><td>±0.5°</td><td>±0.3°</td><td>±0.2°</td>
+                                <td>±1°</td>
+                                <td>±0.5°</td>
+                                <td>±0.3°</td>
+                                <td>±0.2°</td>
                             </tr>
                             <tr>
                                 <td class="gray-cell">m (中)</td>
-                                <td>±1°</td><td>±1°</td><td>±0.5°</td><td>±0.3°</td>
+                                <td>±1°</td>
+                                <td>±1°</td>
+                                <td>±0.5°</td>
+                                <td>±0.3°</td>
                             </tr>
                             <tr>
                                 <td class="gray-cell">c (粗)</td>
-                                <td>±1°</td><td>±1.5°</td><td>±1°</td><td>±0.5°</td>
+                                <td>±1°</td>
+                                <td>±1.5°</td>
+                                <td>±1°</td>
+                                <td>±0.5°</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+
+            <p class="footnote">*參照 ISO 2768-1 規範</p>
+
+            <div class="iso-section-title">ISO 20457 塑膠成型件公差</div>
+            <div class="iso-card">
+                <div class="iso-title">公差表（單位：mm）</div>
+                <div class="table-scroll">
+                    <table class="iso-table" style="min-width: 1400px;">
+                        <thead>
+                            <tr>
+                                <th colspan="2" rowspan="2">Tolerance group</th>
+                                <th colspan="16">Limit dimensions for nominal size ranges</th>
+                            </tr>
+                            <tr>
+                                <th>1 to 3</th>
+                                <th>&gt; 3 to 6</th>
+                                <th>&gt; 6 to 10</th>
+                                <th>&gt; 10 to 18</th>
+                                <th>&gt; 18 to 30</th>
+                                <th>&gt; 30 to 50</th>
+                                <th>&gt; 50 to 80</th>
+                                <th>&gt; 80 to 120</th>
+                                <th>&gt; 120 to 180</th>
+                                <th>&gt; 180 to 250</th>
+                                <th>&gt; 250 to 315</th>
+                                <th>&gt; 315 to 400</th>
+                                <th>&gt; 400 to 500</th>
+                                <th>&gt; 500 to 630</th>
+                                <th>&gt; 630 to 800</th>
+                                <th>&gt; 800 to 1000</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="gray-cell" rowspan="2">TG1</td>
+                                <td class="gray-cell">W</td>
+                                <td>±0.007</td>
+                                <td>±0.012</td>
+                                <td>±0.018</td>
+                                <td>±0.022</td>
+                                <td>±0.026</td>
+                                <td>±0.031</td>
+                                <td>±0.037</td>
+                                <td>±0.044</td>
+                                <td>–</td>
+                                <td>–</td>
+                                <td>–</td>
+                                <td>–</td>
+                                <td>–</td>
+                                <td>–</td>
+                                <td>–</td>
+                                <td>–</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell">NW</td>
+                                <td>±0.012</td>
+                                <td>±0.018</td>
+                                <td>±0.022</td>
+                                <td>±0.026</td>
+                                <td>±0.031</td>
+                                <td>±0.037</td>
+                                <td>±0.044</td>
+                                <td>±0.050</td>
+                                <td>–</td>
+                                <td>–</td>
+                                <td>–</td>
+                                <td>–</td>
+                                <td>–</td>
+                                <td>–</td>
+                                <td>–</td>
+                                <td>–</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell" rowspan="2">TG2</td>
+                                <td class="gray-cell">W</td>
+                                <td>±0.013</td>
+                                <td>±0.020</td>
+                                <td>±0.029</td>
+                                <td>±0.035</td>
+                                <td>±0.042</td>
+                                <td>±0.050</td>
+                                <td>±0.060</td>
+                                <td>±0.090</td>
+                                <td>±0.13</td>
+                                <td>±0.15</td>
+                                <td>±0.16</td>
+                                <td>±0.18</td>
+                                <td>±0.20</td>
+                                <td>–</td>
+                                <td>–</td>
+                                <td>–</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell">NW</td>
+                                <td>±0.020</td>
+                                <td>±0.029</td>
+                                <td>±0.035</td>
+                                <td>±0.042</td>
+                                <td>±0.050</td>
+                                <td>±0.060</td>
+                                <td>±0.090</td>
+                                <td>±0.13</td>
+                                <td>±0.15</td>
+                                <td>±0.16</td>
+                                <td>±0.18</td>
+                                <td>±0.20</td>
+                                <td>±0.22</td>
+                                <td>–</td>
+                                <td>–</td>
+                                <td>–</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell" rowspan="2">TG3</td>
+                                <td class="gray-cell">W</td>
+                                <td>±0.020</td>
+                                <td>±0.031</td>
+                                <td>±0.05</td>
+                                <td>±0.06</td>
+                                <td>±0.07</td>
+                                <td>±0.08</td>
+                                <td>±0.10</td>
+                                <td>±0.15</td>
+                                <td>±0.20</td>
+                                <td>±0.23</td>
+                                <td>±0.26</td>
+                                <td>±0.29</td>
+                                <td>±0.40</td>
+                                <td>±0.55</td>
+                                <td>±0.63</td>
+                                <td>±0.70</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell">NW</td>
+                                <td>±0.031</td>
+                                <td>±0.050</td>
+                                <td>±0.06</td>
+                                <td>±0.07</td>
+                                <td>±0.08</td>
+                                <td>±0.10</td>
+                                <td>±0.15</td>
+                                <td>±0.20</td>
+                                <td>±0.23</td>
+                                <td>±0.26</td>
+                                <td>±0.29</td>
+                                <td>±0.40</td>
+                                <td>±0.55</td>
+                                <td>±0.63</td>
+                                <td>±0.70</td>
+                                <td>±0.77</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell" rowspan="2">TG4</td>
+                                <td class="gray-cell">W</td>
+                                <td>±0.03</td>
+                                <td>±0.05</td>
+                                <td>±0.08</td>
+                                <td>±0.09</td>
+                                <td>±0.11</td>
+                                <td>±0.13</td>
+                                <td>±0.15</td>
+                                <td>±0.23</td>
+                                <td>±0.32</td>
+                                <td>±0.35</td>
+                                <td>±0.41</td>
+                                <td>±0.45</td>
+                                <td>±0.63</td>
+                                <td>±0.88</td>
+                                <td>±1.00</td>
+                                <td>±1.15</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell">NW</td>
+                                <td>±0.05</td>
+                                <td>±0.08</td>
+                                <td>±0.09</td>
+                                <td>±0.11</td>
+                                <td>±0.13</td>
+                                <td>±0.15</td>
+                                <td>±0.23</td>
+                                <td>±0.32</td>
+                                <td>±0.35</td>
+                                <td>±0.41</td>
+                                <td>±0.45</td>
+                                <td>±0.63</td>
+                                <td>±0.88</td>
+                                <td>±1.00</td>
+                                <td>±1.15</td>
+                                <td>±1.30</td>
+                            </tr>
+                            <tr class="tg-highlight">
+                                <td class="gray-cell" rowspan="2">TG5</td>
+                                <td class="gray-cell">W</td>
+                                <td>±0.05</td>
+                                <td>±0.08</td>
+                                <td>±0.11</td>
+                                <td>±0.14</td>
+                                <td>±0.17</td>
+                                <td>±0.20</td>
+                                <td>±0.23</td>
+                                <td>±0.36</td>
+                                <td>±0.50</td>
+                                <td>±0.58</td>
+                                <td>±0.65</td>
+                                <td>±0.70</td>
+                                <td>±1.00</td>
+                                <td>±1.40</td>
+                                <td>±1.60</td>
+                                <td>±1.80</td>
+                            </tr>
+                            <tr class="tg-highlight">
+                                <td class="gray-cell">NW</td>
+                                <td>±0.08</td>
+                                <td>±0.11</td>
+                                <td>±0.14</td>
+                                <td>±0.17</td>
+                                <td>±0.20</td>
+                                <td>±0.23</td>
+                                <td>±0.36</td>
+                                <td>±0.50</td>
+                                <td>±0.58</td>
+                                <td>±0.65</td>
+                                <td>±0.70</td>
+                                <td>±1.00</td>
+                                <td>±1.40</td>
+                                <td>±1.60</td>
+                                <td>±1.80</td>
+                                <td>±2.10</td>
+                            </tr>
+                            <tr class="tg-highlight">
+                                <td class="gray-cell" rowspan="2">TG6</td>
+                                <td class="gray-cell">W</td>
+                                <td>±0.07</td>
+                                <td>±0.12</td>
+                                <td>±0.18</td>
+                                <td>±0.22</td>
+                                <td>±0.26</td>
+                                <td>±0.31</td>
+                                <td>±0.37</td>
+                                <td>±0.57</td>
+                                <td>±0.80</td>
+                                <td>±0.93</td>
+                                <td>±1.05</td>
+                                <td>±1.15</td>
+                                <td>±1.60</td>
+                                <td>±2.20</td>
+                                <td>±2.50</td>
+                                <td>±2.80</td>
+                            </tr>
+                            <tr class="tg-highlight">
+                                <td class="gray-cell">NW</td>
+                                <td>±0.12</td>
+                                <td>±0.18</td>
+                                <td>±0.22</td>
+                                <td>±0.26</td>
+                                <td>±0.31</td>
+                                <td>±0.37</td>
+                                <td>±0.57</td>
+                                <td>±0.80</td>
+                                <td>±0.93</td>
+                                <td>±1.05</td>
+                                <td>±1.15</td>
+                                <td>±1.60</td>
+                                <td>±2.20</td>
+                                <td>±2.50</td>
+                                <td>±2.80</td>
+                                <td>±3.10</td>
+                            </tr>
+                            <tr class="tg-highlight">
+                                <td class="gray-cell" rowspan="2">TG7</td>
+                                <td class="gray-cell">W</td>
+                                <td>±0.13</td>
+                                <td>±0.20</td>
+                                <td>±0.29</td>
+                                <td>±0.35</td>
+                                <td>±0.42</td>
+                                <td>±0.50</td>
+                                <td>±0.60</td>
+                                <td>±0.90</td>
+                                <td>±1.25</td>
+                                <td>±1.45</td>
+                                <td>±1.60</td>
+                                <td>±1.80</td>
+                                <td>±2.60</td>
+                                <td>±3.50</td>
+                                <td>±4.00</td>
+                                <td>±4.50</td>
+                            </tr>
+                            <tr class="tg-highlight">
+                                <td class="gray-cell">NW</td>
+                                <td>±0.20</td>
+                                <td>±0.29</td>
+                                <td>±0.35</td>
+                                <td>±0.42</td>
+                                <td>±0.50</td>
+                                <td>±0.60</td>
+                                <td>±0.90</td>
+                                <td>±1.25</td>
+                                <td>±1.45</td>
+                                <td>±1.60</td>
+                                <td>±1.80</td>
+                                <td>±2.60</td>
+                                <td>±3.50</td>
+                                <td>±4.00</td>
+                                <td>±4.50</td>
+                                <td>±5.00</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell" rowspan="2">TG8</td>
+                                <td class="gray-cell">W</td>
+                                <td>±0.20</td>
+                                <td>±0.31</td>
+                                <td>±0.45</td>
+                                <td>±0.55</td>
+                                <td>±0.65</td>
+                                <td>±0.80</td>
+                                <td>±0.95</td>
+                                <td>±1.40</td>
+                                <td>±2.00</td>
+                                <td>±2.30</td>
+                                <td>±2.60</td>
+                                <td>±2.85</td>
+                                <td>±4.00</td>
+                                <td>±5.50</td>
+                                <td>±6.25</td>
+                                <td>±7.00</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell">NW</td>
+                                <td>±0.31</td>
+                                <td>±0.45</td>
+                                <td>±0.55</td>
+                                <td>±0.65</td>
+                                <td>±0.80</td>
+                                <td>±0.95</td>
+                                <td>±1.40</td>
+                                <td>±2.00</td>
+                                <td>±2.30</td>
+                                <td>±2.60</td>
+                                <td>±2.85</td>
+                                <td>±4.00</td>
+                                <td>±5.50</td>
+                                <td>±6.25</td>
+                                <td>±7.00</td>
+                                <td>±7.75</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell" colspan="2">TG9</td>
+                                <td>±0.30</td>
+                                <td>±0.49</td>
+                                <td>±0.75</td>
+                                <td>±0.90</td>
+                                <td>±1.05</td>
+                                <td>±1.25</td>
+                                <td>±1.50</td>
+                                <td>±2.25</td>
+                                <td>±3.15</td>
+                                <td>±3.60</td>
+                                <td>±4.05</td>
+                                <td>±4.45</td>
+                                <td>±6.20</td>
+                                <td>±8.50</td>
+                                <td>±10.00</td>
+                                <td>±11.50</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="footnote" style="text-align:left; margin-top:8px; line-height:1.7;">
+                    NOTE 1　W: 尺寸在同側模具內，沒有橫跨PL; NW: 尺寸橫跨公母模<br>
+                    NOTE 2　TG9 並無分 W 或 NW.<br>
+                </p>
+            </div>
+            <p class="footnote">*參照 ISO 20457 規範</p>
+
+            <div class="iso-section-title">ISO 9013 雷射切割尺寸公差</div>
+            <div class="iso-card">
+                <div class="iso-title">鈑厚與尺寸公差對照表（單位：mm）</div>
+                <div class="table-scroll">
+                    <table class="iso-table" style="min-width: 900px;">
+                        <thead>
+                            <tr>
+                                <th colspan="2" rowspan="3">Work piece thickness</th>
+                                <th colspan="10">Nominal dimensions</th>
+                            </tr>
+                            <tr>
+                                <th>&gt;0 to &lt;3</th>
+                                <th>≤3 to &lt;10</th>
+                                <th>≤10 to &lt;35</th>
+                                <th>≥35 to &lt;125</th>
+                                <th>≥125 to &lt;315</th>
+                                <th>≥315 to &lt;1 000</th>
+                                <th>≥1 000 to &lt;2 000</th>
+                                <th>≥2 000 to &lt;4 000</th>
+                                <th>≥4 000 to &lt;6 000</th>
+                                <th>≥6 000 to &lt;8 000</th>
+                            </tr>
+                            <tr>
+                                <th colspan="10">Limit deviations</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="gray-cell">&gt;0</td>
+                                <td class="gray-cell">to ≤1</td>
+                                <td>±0.075</td>
+                                <td>±0.10</td>
+                                <td>±0.10</td>
+                                <td>±0.20</td>
+                                <td>±0.20</td>
+                                <td>±0.30</td>
+                                <td>±0.40</td>
+                                <td>±0.65</td>
+                                <td>±0.90</td>
+                                <td>±1.60</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell">&gt;1</td>
+                                <td class="gray-cell">to ≤3.15</td>
+                                <td>±0.10</td>
+                                <td>±0.15</td>
+                                <td>±0.20</td>
+                                <td>±0.25</td>
+                                <td>±0.25</td>
+                                <td>±0.35</td>
+                                <td>±0.40</td>
+                                <td>±0.65</td>
+                                <td>±1.00</td>
+                                <td>±1.75</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell">&gt;3.15</td>
+                                <td class="gray-cell">to ≤6.3</td>
+                                <td>±0.20</td>
+                                <td>±0.20</td>
+                                <td>±0.25</td>
+                                <td>±0.25</td>
+                                <td>±0.30</td>
+                                <td>±0.40</td>
+                                <td>±0.45</td>
+                                <td>±0.70</td>
+                                <td>±1.10</td>
+                                <td>±1.90</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell">&gt;6.3</td>
+                                <td class="gray-cell">to ≤10</td>
+                                <td>—</td>
+                                <td>±0.25</td>
+                                <td>±0.30</td>
+                                <td>±0.30</td>
+                                <td>±0.35</td>
+                                <td>±0.45</td>
+                                <td>±0.55</td>
+                                <td>±0.75</td>
+                                <td>±1.25</td>
+                                <td>±2.20</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell">&gt;10</td>
+                                <td class="gray-cell">to ≤15</td>
+                                <td>—</td>
+                                <td>±0.30</td>
+                                <td>±0.35</td>
+                                <td>±0.40</td>
+                                <td>±0.45</td>
+                                <td>±0.55</td>
+                                <td>±0.65</td>
+                                <td>±0.85</td>
+                                <td>±1.50</td>
+                                <td>±2.50</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell">&gt;15</td>
+                                <td class="gray-cell">to ≤20</td>
+                                <td>—</td>
+                                <td>±0.40</td>
+                                <td>±0.40</td>
+                                <td>±0.45</td>
+                                <td>±0.55</td>
+                                <td>±0.75</td>
+                                <td>±0.85</td>
+                                <td>±1.2</td>
+                                <td>±1.90</td>
+                                <td>±2.80</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell">&gt;20</td>
+                                <td class="gray-cell">to ≤25</td>
+                                <td>—</td>
+                                <td>±0.45</td>
+                                <td>±0.50</td>
+                                <td>±0.60</td>
+                                <td>±0.70</td>
+                                <td>±0.90</td>
+                                <td>±1.10</td>
+                                <td>±1.60</td>
+                                <td>±2.40</td>
+                                <td>±3.25</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell">&gt;25</td>
+                                <td class="gray-cell">to ≤32</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td>±0.70</td>
+                                <td>±0.70</td>
+                                <td>±0.80</td>
+                                <td>±1.0</td>
+                                <td>±1.6</td>
+                                <td>±2.25</td>
+                                <td>±3.00</td>
+                                <td>±4.00</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell">&gt;32</td>
+                                <td class="gray-cell">to ≤50</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td>±0.7</td>
+                                <td>±0.70</td>
+                                <td>±0.8</td>
+                                <td>±1.0</td>
+                                <td>±1.6</td>
+                                <td>±2.5</td>
+                                <td>±3.8</td>
+                                <td>±5.0</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell">&gt;50</td>
+                                <td class="gray-cell">to ≤100</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td>±1.3</td>
+                                <td>±1.3</td>
+                                <td>±1.4</td>
+                                <td>±1.7</td>
+                                <td>±2.2</td>
+                                <td>±3.1</td>
+                                <td>±4.4</td>
+                                <td>±5.6</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell">&gt;100</td>
+                                <td class="gray-cell">to ≤150</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td>±1.9</td>
+                                <td>±2.0</td>
+                                <td>±2.1</td>
+                                <td>±2.3</td>
+                                <td>±2.9</td>
+                                <td>±3.8</td>
+                                <td>±5.1</td>
+                                <td>±6.3</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell">&gt;150</td>
+                                <td class="gray-cell">to ≤200</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td>±2.6</td>
+                                <td>±2.7</td>
+                                <td>±2.7</td>
+                                <td>±3.0</td>
+                                <td>±3.6</td>
+                                <td>±4.5</td>
+                                <td>±5.7</td>
+                                <td>±7.0</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell">&gt;200</td>
+                                <td class="gray-cell">to ≤250</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td>±3.7</td>
+                                <td>±4.2</td>
+                                <td>±5.2</td>
+                                <td>±6.4</td>
+                                <td>±7.7</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell">&gt;250</td>
+                                <td class="gray-cell">to ≤300</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td>±4.4</td>
+                                <td>±4.9</td>
+                                <td>±5.9</td>
+                                <td>±7.1</td>
+                                <td>±8.4</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <p class="footnote">*參照 ISO 9013 規範</p>
 
             <div class="iso-section-title">表面粗糙度規範</div>
             <div class="iso-card">
@@ -597,13 +1188,41 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td class="gray-cell">超精密研磨 / 拋光 (Superfinishing)</td><td>0.025~0.1</td><td>用於光學、精密軸承、航空級零件</td></tr>
-                            <tr><td class="gray-cell">精密研磨 (Precision Grinding)</td><td>0.1~0.4</td><td>高精度軸、配合孔</td></tr>
-                            <tr><td class="gray-cell">精車 (Fine Turning)</td><td>0.4~1.6</td><td>精密滑動配合零件</td></tr>
-                            <tr><td class="gray-cell">一般車削 / 銑削 (General Turning/Milling)</td><td>1.6~3.2</td><td>常見機械加工零件</td></tr>
-                            <tr><td class="gray-cell">粗銑 / 粗車 (Rough Machining)</td><td>3.2~12.5</td><td>結構件或非精密區域</td></tr>
-                            <tr><td class="gray-cell">鑄造 / 鍛造 (Casting/Forging)</td><td>6.3~25</td><td>毛坯或次加工表面</td></tr>
-                            <tr><td class="gray-cell">焊接表面 (Weld Surface)</td><td>12.5~50</td><td>焊縫及未修磨表面</td></tr>
+                            <tr>
+                                <td class="gray-cell">超精密研磨 / 拋光 (Superfinishing)</td>
+                                <td>0.025~0.1</td>
+                                <td>用於光學、精密軸承、航空級零件</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell">精密研磨 (Precision Grinding)</td>
+                                <td>0.1~0.4</td>
+                                <td>高精度軸、配合孔</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell">精車 (Fine Turning)</td>
+                                <td>0.4~1.6</td>
+                                <td>精密滑動配合零件</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell">一般車削 / 銑削 (General Turning/Milling)</td>
+                                <td>1.6~3.2</td>
+                                <td>常見機械加工零件</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell">粗銑 / 粗車 (Rough Machining)</td>
+                                <td>3.2~12.5</td>
+                                <td>結構件或非精密區域</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell">鑄造 / 鍛造 (Casting/Forging)</td>
+                                <td>6.3~25</td>
+                                <td>毛坯或次加工表面</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell">焊接表面 (Weld Surface)</td>
+                                <td>12.5~50</td>
+                                <td>焊縫及未修磨表面</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -621,265 +1240,38 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td class="gray-cell">高精度配合</td><td>0.2 ~ 0.8</td><td>H7/g6 軸孔、導柱</td></tr>
-                            <tr><td class="gray-cell">密封面</td><td>0.1 ~ 0.8</td><td>O-ring 接觸、避洩漏</td></tr>
-                            <tr><td class="gray-cell">裝飾件＆外觀面</td><td>0.8 ~ 1.6</td><td>一般裝飾處理件</td></tr>
-                            <tr><td class="gray-cell">結構件＆非配合區</td><td>3.2 ~ 12.5</td><td>焊接、支撐結構件</td></tr>
-                            <tr><td class="gray-cell">鑄件毛胚</td><td>12.5 ~ 50</td><td>鍛造、鑄造原始表面</td></tr>
+                            <tr>
+                                <td class="gray-cell">高精度配合</td>
+                                <td>0.2 ~ 0.8</td>
+                                <td>H7/g6 軸孔、導柱</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell">密封面</td>
+                                <td>0.1 ~ 0.8</td>
+                                <td>O-ring 接觸、避洩漏</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell">裝飾件＆外觀面</td>
+                                <td>0.8 ~ 1.6</td>
+                                <td>一般裝飾處理件</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell">結構件＆非配合區</td>
+                                <td>3.2 ~ 12.5</td>
+                                <td>焊接、支撐結構件</td>
+                            </tr>
+                            <tr>
+                                <td class="gray-cell">鑄件毛胚</td>
+                                <td>12.5 ~ 50</td>
+                                <td>鍛造、鑄造原始表面</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <p class="footnote">*參照 ISO 2768-1 &amp; ISO 1302 規範</p>
+            <p class="footnote">*參照 ISO 1302 規範</p>
         </div>
 
-        <!-- ===== Tab 3: PEM 規格表 ===== -->
-        <div id="pem-standards" class="tab-content">
-            <div class="iso-section-title">PEM 壓鉚螺母規格表</div>
-
-            <div class="pem-info-block">
-                <div style="flex: 1; min-width: 240px; text-align: center;">
-                    <img src="https://raw.githubusercontent.com/Hmmmmmburger/OS-upgrade/main/pem_clinchnut_dim.png"
-                        alt="PEM Clinch Nut Dimensions">
-                </div>
-                <div style="flex: 1.2; min-width: 260px;">
-                    <h4>適用板材硬度規範</h4>
-                    <ul>
-                        <li><strong>S / SS nuts</strong> are recommended for use in steel or aluminum sheets <strong>HRB 80 / HB 150</strong> or less.</li>
-                        <li><strong>CLS / CLSS nuts</strong> are recommended for use in steel or aluminum sheets <strong>HRB 70 / HB 125</strong> or less.</li>
-                        <li><strong>SP nuts</strong> are recommended for use in stainless steel sheets <strong>HRB 90 / HB 192</strong> or less.</li>
-                        <li><strong>CLA nuts</strong> are recommended for use in steel or aluminum sheets <strong>HRB 50 / HB 82</strong> or less.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="iso-card">
-                <div class="iso-title">S™/SS™/CLS™/CLSS™/SP™ Nuts</div>
-                <div class="table-scroll">
-                    <table class="pem-table">
-                        <thead>
-                            <tr>
-                                <th rowspan="3" style="width:30px;">System</th>
-                                <th rowspan="2">Thread Size</th>
-                                <th colspan="3">Type Fastener Material</th>
-                                <th rowspan="2">Thread Code</th>
-                                <th rowspan="2">Shank Code</th>
-                                <th rowspan="2">A (Shank) Max.</th>
-                                <th rowspan="2">Rec. Min. Sheet Thickness (1)</th>
-                                <th rowspan="2">Hole Size In Sheet +0.08</th>
-                                <th rowspan="2">C Max.</th>
-                                <th rowspan="2">E ±0.25</th>
-                                <th rowspan="2">T ±0.25</th>
-                                <th rowspan="2">Min. Dist. Hole C/L To Edge (4)</th>
-                            </tr>
-                            <tr>
-                                <th style="font-weight:normal;font-size:10.5px;">Carbon Steel</th>
-                                <th style="font-weight:normal;font-size:10.5px;">Stainless Steel</th>
-                                <th style="font-weight:normal;font-size:10.5px;">Hardened Stainless Steel</th>
-                            </tr>
-                        </thead>
-                        <tbody style="color:#444;">
-                            <tr>
-                                <td class="gray-cell" rowspan="31">Metric</td>
-                                <td rowspan="3">M2 x 0.4</td><td rowspan="3">S</td><td rowspan="3">CLS</td><td rowspan="3">SP</td><td rowspan="3">M2</td>
-                                <td>0<sup>(2)</sup></td><td>0.77</td><td>0.8</td>
-                                <td rowspan="3">4.22</td><td rowspan="3">4.2</td><td rowspan="3">6.35</td><td rowspan="3">1.5</td><td rowspan="3">4.8</td>
-                            </tr>
-                            <tr><td>1</td><td>0.97</td><td>1</td></tr>
-                            <tr><td>2</td><td>1.38</td><td>1.4</td></tr>
-
-                            <tr>
-                                <td rowspan="3">M2.5 x 0.45</td><td rowspan="3">S</td><td rowspan="3">CLS</td><td rowspan="3">SP</td><td rowspan="3">M2.5</td>
-                                <td>0</td><td>0.77</td><td>0.8</td>
-                                <td rowspan="3">4.22</td><td rowspan="3">4.2</td><td rowspan="3">6.35</td><td rowspan="3">1.5</td><td rowspan="3">4.8</td>
-                            </tr>
-                            <tr><td>1</td><td>0.97</td><td>1</td></tr>
-                            <tr><td>2</td><td>1.38</td><td>1.4</td></tr>
-
-                            <tr>
-                                <td rowspan="3">M3 x 0.5</td><td rowspan="3">S</td><td rowspan="3">CLS</td><td rowspan="3">SP</td><td rowspan="3">M3</td>
-                                <td>0</td><td>0.77</td><td>0.8</td>
-                                <td rowspan="3">4.22</td><td rowspan="3">4.2</td><td rowspan="3">6.35</td><td rowspan="3">1.5</td><td rowspan="3">4.8</td>
-                            </tr>
-                            <tr><td>1</td><td>0.97</td><td>1</td></tr>
-                            <tr><td>2</td><td>1.38</td><td>1.4</td></tr>
-
-                            <tr>
-                                <td rowspan="3">M3.5 x 0.6</td><td rowspan="3">S</td><td rowspan="3">CLS</td><td rowspan="3">—</td><td rowspan="3">M3.5</td>
-                                <td>0</td><td>0.77</td><td>0.8</td>
-                                <td rowspan="3">4.75</td><td rowspan="3">4.73</td><td rowspan="3">7.11</td><td rowspan="3">1.5</td><td rowspan="3">5.6</td>
-                            </tr>
-                            <tr><td>1</td><td>0.97</td><td>1</td></tr>
-                            <tr><td>2</td><td>1.38</td><td>1.4</td></tr>
-
-                            <tr>
-                                <td rowspan="3">M4 x 0.7</td><td rowspan="3">S</td><td rowspan="3">CLS</td><td rowspan="3">SP</td><td rowspan="3">M4</td>
-                                <td>0</td><td>0.77</td><td>0.8</td>
-                                <td rowspan="3">5.41</td><td rowspan="3">5.38</td><td rowspan="3">7.87</td><td rowspan="3">2</td><td rowspan="3">6.9</td>
-                            </tr>
-                            <tr><td>1</td><td>0.97</td><td>1</td></tr>
-                            <tr><td>2</td><td>1.38</td><td>1.4</td></tr>
-
-                            <tr>
-                                <td rowspan="3">M5 x 0.8</td><td rowspan="3">SS</td><td rowspan="3">CLSS</td><td rowspan="3">SP</td><td rowspan="3">M5</td>
-                                <td>0</td><td>0.77</td><td>0.8</td>
-                                <td rowspan="3">6.35</td><td rowspan="3">6.33</td><td rowspan="3">8.64</td><td rowspan="3">2</td><td rowspan="3">7.1</td>
-                            </tr>
-                            <tr><td>1</td><td>0.97</td><td>1</td></tr>
-                            <tr><td>2</td><td>1.38</td><td>1.4</td></tr>
-
-                            <tr>
-                                <td rowspan="4">M6 x 1</td><td rowspan="4">S<sup>(3)</sup></td><td rowspan="4">CLS</td><td rowspan="4">SP</td><td rowspan="4">M6</td>
-                                <td>00<sup>(2)</sup></td><td>0.89</td><td>0.92</td>
-                                <td rowspan="4">8.75</td><td rowspan="4">8.73</td><td rowspan="4">11.18</td><td rowspan="4">4.08</td><td rowspan="4">8.6</td>
-                            </tr>
-                            <tr><td>0<sup>(2)</sup></td><td>1.15</td><td>1.2</td></tr>
-                            <tr><td>1</td><td>1.38</td><td>1.4</td></tr>
-                            <tr><td>2</td><td>2.21</td><td>2.29</td></tr>
-
-                            <tr>
-                                <td rowspan="2">M8 x 1.25</td><td rowspan="2">S<sup>(3)</sup></td><td rowspan="2">CLS</td><td rowspan="2">SP</td><td rowspan="2">M8</td>
-                                <td>1</td><td>1.38</td><td>1.4</td>
-                                <td rowspan="2">10.5</td><td rowspan="2">10.47</td><td rowspan="2">12.7</td><td rowspan="2">5.47</td><td rowspan="2">9.7</td>
-                            </tr>
-                            <tr><td>2</td><td>2.21</td><td>2.29</td></tr>
-
-                            <tr>
-                                <td rowspan="2">M10 x 1.5</td><td rowspan="2">S</td><td rowspan="2">CLS</td><td rowspan="2">SP</td><td rowspan="2">M10</td>
-                                <td>1</td><td>2.21</td><td>2.29</td>
-                                <td rowspan="2">14</td><td rowspan="2">13.97</td><td rowspan="2">17.35</td><td rowspan="2">7.48</td><td rowspan="2">13.5</td>
-                            </tr>
-                            <tr><td>2<sup>(2)</sup></td><td>3.05</td><td>3.18</td></tr>
-
-                            <tr>
-                                <td>M12 x 1.75</td><td>S</td><td>—</td><td>—</td><td>M12</td>
-                                <td>1</td><td>3.05</td><td>3.18</td>
-                                <td>17</td><td>16.95</td><td>20.57</td><td>8.5</td><td>16</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="iso-card">
-                <div class="iso-title">安裝與受力強度規範 (拉拔/扭轉力)</div>
-                <div class="table-scroll">
-                    <table class="pem-table">
-                        <thead>
-                            <tr>
-                                <th>Type</th>
-                                <th>Thread Code</th>
-                                <th>Shank Code</th>
-                                <th>Test Sheet Material <sup>(2)</sup></th>
-                                <th>Installation (kN)</th>
-                                <th>Pushout (N)</th>
-                                <th>Torque-out (N·m)</th>
-                            </tr>
-                        </thead>
-                        <tbody style="color:#444;">
-                            <tr>
-                                <td class="gray-cell" rowspan="6">S<br>CLS</td>
-                                <td rowspan="6">M2<br>M2.5<br>M3</td>
-                                <td>0</td><td rowspan="3">5052-H34<br>Aluminum</td><td rowspan="3">6.7-8.9</td><td>280</td><td>0.9</td>
-                            </tr>
-                            <tr><td>1</td><td>400</td><td>1.13</td></tr>
-                            <tr><td>2</td><td>750</td><td>1.47</td></tr>
-                            <tr>
-                                <td>0</td><td rowspan="3">Cold-rolled<br>Steel</td><td rowspan="3">11.2-15.6</td><td>470</td><td>1.47</td>
-                            </tr>
-                            <tr><td>1</td><td>550</td><td>1.7</td></tr>
-                            <tr><td>2</td><td>1010</td><td>2.03</td></tr>
-
-                            <tr>
-                                <td class="gray-cell" rowspan="6">S<br>CLS</td>
-                                <td rowspan="6">M3.5</td>
-                                <td>0</td><td rowspan="3">5052-H34<br>Aluminum</td><td rowspan="3">11.2-13.5</td><td>280</td><td>1.8</td>
-                            </tr>
-                            <tr><td>1</td><td>400</td><td>1.92</td></tr>
-                            <tr><td>2</td><td>840</td><td>2.5</td></tr>
-                            <tr>
-                                <td>0</td><td rowspan="3">Cold-rolled<br>Steel</td><td rowspan="3">13.4-26.7</td><td>480</td><td>1.8</td>
-                            </tr>
-                            <tr><td>1</td><td>570</td><td>2.3</td></tr>
-                            <tr><td>2</td><td>1210</td><td>2.3</td></tr>
-
-                            <tr>
-                                <td class="gray-cell" rowspan="6">S<br>CLS</td>
-                                <td rowspan="6">M4</td>
-                                <td>0</td><td rowspan="3">5052-H34<br>Aluminum</td><td rowspan="3">11.2-13.4</td><td>300</td><td>2.37</td>
-                            </tr>
-                            <tr><td>1</td><td>470</td><td>2.6</td></tr>
-                            <tr><td>2</td><td>970</td><td>4</td></tr>
-                            <tr>
-                                <td>0</td><td rowspan="3">Cold-rolled<br>Steel</td><td rowspan="3">18-27</td><td>490</td><td>2.95</td>
-                            </tr>
-                            <tr><td>1</td><td>645</td><td>4</td></tr>
-                            <tr><td>2</td><td>1250</td><td>5.1</td></tr>
-
-                            <tr>
-                                <td class="gray-cell" rowspan="6">SS<br>CLSS</td>
-                                <td rowspan="6">M5</td>
-                                <td>0</td><td rowspan="3">5052-H34<br>Aluminum</td><td rowspan="3">11.2-15.6</td><td>300</td><td>3</td>
-                            </tr>
-                            <tr><td>1</td><td>480</td><td>3.6</td></tr>
-                            <tr><td>2</td><td>845</td><td>5.7</td></tr>
-                            <tr>
-                                <td>0</td><td rowspan="3">Cold-rolled<br>Steel</td><td rowspan="3">18-38</td><td>530</td><td>3.6</td>
-                            </tr>
-                            <tr><td>1</td><td>800</td><td>4.5</td></tr>
-                            <tr><td>2</td><td>1420</td><td>6.8</td></tr>
-
-                            <tr>
-                                <td class="gray-cell" rowspan="8">S<br>CLS</td>
-                                <td rowspan="8">M6</td>
-                                <td>00</td><td rowspan="4">5052-H34<br>Aluminum</td><td rowspan="4">18-32</td><td>750</td><td>6.5</td>
-                            </tr>
-                            <tr><td>0</td><td>970</td><td>7.9</td></tr>
-                            <tr><td>1</td><td>1580</td><td>10.2</td></tr>
-                            <tr><td>2</td><td>1580</td><td>14.1</td></tr>
-                            <tr>
-                                <td>00</td><td rowspan="4">Cold-rolled<br>Steel</td><td rowspan="4">27-36</td><td>900</td><td>10</td>
-                            </tr>
-                            <tr><td>0</td><td>1380</td><td>13</td></tr>
-                            <tr><td>1</td><td>1760</td><td>17</td></tr>
-                            <tr><td>2</td><td>1760</td><td>17</td></tr>
-
-                            <tr>
-                                <td class="gray-cell" rowspan="4">S<br>CLS</td>
-                                <td rowspan="4">M8</td>
-                                <td>1</td><td rowspan="2">5052-H34<br>Aluminum</td><td rowspan="2">18-32</td><td>1570</td><td>13.6</td>
-                            </tr>
-                            <tr><td>2</td><td>1570</td><td>18.1</td></tr>
-                            <tr>
-                                <td>1</td><td rowspan="2">Cold-rolled<br>Steel</td><td rowspan="2">27-36</td><td>1870</td><td>18.7</td>
-                            </tr>
-                            <tr><td>2</td><td>1870</td><td>20.3</td></tr>
-
-                            <tr>
-                                <td class="gray-cell" rowspan="4">S<br>CLS</td>
-                                <td rowspan="4">M10</td>
-                                <td>1</td><td rowspan="2">5052-H34<br>Aluminum</td><td rowspan="2">22-36</td><td>1760</td><td>32.7</td>
-                            </tr>
-                            <tr><td>2</td><td>1760</td><td>32.7</td></tr>
-                            <tr>
-                                <td>1</td><td rowspan="2">Cold-rolled<br>Steel</td><td rowspan="2">32-50</td><td>2020</td><td>36.2</td>
-                            </tr>
-                            <tr><td>2</td><td>2020</td><td>36.2</td></tr>
-
-                            <tr>
-                                <td class="gray-cell" rowspan="2">S</td>
-                                <td rowspan="2">M12</td>
-                                <td>1</td><td>5052-H34<br>Aluminum</td><td>31-40</td><td>2113</td><td>39.5</td>
-                            </tr>
-                            <tr>
-                                <td>1</td><td>Cold-rolled<br>Steel</td><td>44-67</td><td>4670</td><td>83.1</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <p class="footnote">*參照 PEM 規格手冊</p>
-        </div>
     </div>
 
     <script>
